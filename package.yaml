@@ -1,0 +1,20 @@
+name: dependent-effects
+version: 0.1.0.0
+#synopsis:
+#description:
+
+github: epoberezkin/dependent-effects
+homepage: https://github.com/epoberezkin/dependent-effects#readme
+license: MIT
+author: Evgeny Poberezkin
+maintainer: evgeny@poberezkin.com
+copyright: 2020 Evgeny Poberezkin
+category: Effects
+extra-source-files:
+  - README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+
+library:
+  source-dirs: src
