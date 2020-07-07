@@ -14,12 +14,12 @@
 -- This module defines a "freer indexed monad" 'XFree'.
 -- It generalizes freer monad to have type indices/parameters:
 --
---   * Freer Monads, More Extensible Effects by Oleg Kiselyov and Hiromi Ishii (http://okmij.org/ftp/Haskell/extensible/more.pdf)
---   * Parameterized monads (http://okmij.org/ftp/Haskell/extensible/more.pdf).
---   * Parameterized extensible effects and session types (http://okmij.org/ftp/Haskell/extensible/index.html#extext)
+--   * <http://okmij.org/ftp/Haskell/extensible/more.pdf Freer Monads, More Extensible Effects by Oleg Kiselyov and Hiromi Ishii>
+--   * <http://okmij.org/ftp/Computation/monads.html#param-monad Parameterized monads>
+--   * <http://okmij.org/ftp/Haskell/extensible/index.html#extext Parameterized extensible effects and session types>
 --
 -- It defines 'Functor' instance for @'XFree' f p q@, 'XApplicative' and 'XMonad' instances for @'XFree' f@,
--- as well as 'Applicative' and 'Monad' instances for @'XFree' f p p@, where f is an algebraic effect of kind @k -> k -> Type -> Type@
+-- as well as 'Applicative' and 'Monad' instances for @'XFree' f p p@, where f is an effect of kind @k -> k -> Type -> Type@
 --
 -- 'XFree' simplifies defining indexed monadic computations as GADTs without making
 -- them into ad-hoc indexed monads and defining all needed applicative and monadic functions on them.
@@ -34,8 +34,8 @@
 -- >   XPut :: s' -> IxdState s s' ()
 --
 -- you can make it into an indexed monad and use it with do notation
--- (with @RebindableSyntax@ and @Control.XMonad.Do@) with a few lines of
--- boilerplate:
+-- (with @RebindableSyntax@ and @Control.XMonad.'Control.XMonad.Do'@)
+-- with a few lines of boilerplate:
 --
 -- > type XState = XFree IxdState
 -- >

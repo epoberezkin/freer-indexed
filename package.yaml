@@ -43,3 +43,11 @@ dependencies:
 
 library:
   source-dirs: src
+
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Worphans
+  - -Werror=incomplete-patterns
+  - -Werror=incomplete-uni-patterns
+  - -Wno-name-shadowing

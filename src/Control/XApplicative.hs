@@ -11,10 +11,7 @@
 -- Portability : non-portable
 --
 -- This module describes an intermediate type class between
--- a functor and an indexed monad 'XMonad' - an indexed applicative.
---
--- Types that can be made instances of this class must have two type parameters/indexes
--- that must continually chain in threaded computations (see type signature for '<*>:').
+-- a functor and an indexed monad 'Control.XMonad' - an indexed applicative.
 module Control.XApplicative
   ( -- * XApplicative
     XApplicative (..),

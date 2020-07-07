@@ -42,10 +42,12 @@ infixr 1 =<<:, <=<:, >=>:
 -- parameterized (indexed) /monad/, where two type parameters must be
 -- correctly chained.
 --
--- These monads have been described by Oleg Kiselyov here: http://okmij.org/ftp/Computation/monads.html#param-monad
+-- These monads have been described by Oleg Kiselyov in
+-- <http://okmij.org/ftp/Computation/monads.html#param-monad parameterized monads>
 --
--- Indexed monads have been previously released by Edward A. Kmett and Reiner Pope as the package "indexed" -
--- this package adds functions and freer indexed monad 'Control.XFreer.XFree'.
+-- Indexed monads have been previously released by Edward A. Kmett and Reiner Pope
+-- as the package <https://hackage.haskell.org/package/indexed indexed> -
+-- this package adds other monadic functions and freer indexed monad 'Control.XFreer.XFree'.
 --
 -- Semantically, these computations can represent type-level state changes
 -- of some associated resource, with the first index parameter meaning
@@ -53,7 +55,8 @@ infixr 1 =<<:, <=<:, >=>:
 -- the final resource state, making each computation an edge in the graph
 -- of resource state transitions.
 --
--- Chained type parameters in bind operation require that associated resource changes are continuos.
+-- Chained type parameters in bind operation require that associated
+-- resource changes are continuos.
 --
 -- When combined with computations defined as GADTs and singleton types
 -- they can be used to limit allowed computations depending on the context
@@ -61,14 +64,13 @@ infixr 1 =<<:, <=<:, >=>:
 -- of the next computations) and to make type-level state transitions dependent on the
 -- run-time parameters and also on the results of the previous computations.
 --
--- @do@ expressions can support such parameterized monads using RebindableSyntax
--- extension and @Control.XMonad.'Control.XMonad.Do'@ module
--- (it has to be imported separately).
+-- @do@ expressions can support such parameterized monads using
+-- <https://downloads.haskell.org/ghc/latest/docs/html/users_guide/glasgow_exts.html#extension-RebindableSyntax RebindableSyntax>
+-- extension and @Control.XMonad.'Control.XMonad.Do'@ module (it has to be imported separately).
 --
 -- If your code contains any action that can fail (e.g. "monadic" binding with
--- a potentially incomplete pattern match, you computation needs to be an instance
--- of 'XMonadFail' as well to be used in @do@ expression, although it is not recommended,
--- it is better to avoid incomplete pattern matches.
+-- a potentially incomplete pattern match, your computation needs to be an instance
+-- of 'XMonadFail' as well to be used in @do@ expression.
 --
 -- To use @do@ expressions 'GHC.Base.Prelude' has to be explicitly imported hiding monad operators:
 --
