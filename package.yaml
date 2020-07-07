@@ -25,7 +25,7 @@ description: |
   to standard Applicative/Monad functions, following two naming conventions:
 
     * function names are prefixed with "x" (for "indeXed") - e.g. `xpure`, `xreturn`, `xliftM2` etc.
-    * operators are postfixed with ":" (if you squint hard enough, it looks like a subscript "i") - e.g. `<*>:`, `>>=:`, `>=>:` etc.
+    * operators are postfixed with ":" - e.g. `<*>:`, `>>=:`, `>=>:` etc.
 
 github: epoberezkin/freer-indexed
 homepage: https://github.com/epoberezkin/freer-indexed#readme
@@ -36,6 +36,7 @@ copyright: 2020 Evgeny Poberezkin
 category: Effects
 extra-source-files:
   - README.md
+  - CHANGELOG.md
 
 dependencies:
   - base >= 4.7 && < 5
