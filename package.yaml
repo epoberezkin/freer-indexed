@@ -1,20 +1,53 @@
-name: dependent-effects
+name: freer-indexed
 version: 0.1.0.0
-#synopsis:
-#description:
+synopsis: Freer indexed monad for type-level resource-aware effectual operations.
+description: |
+  This package defines "freer indexed monad". It combines the ideas of freer monad and indexed (aka parameterized) monad:
 
-github: epoberezkin/dependent-effects
-homepage: https://github.com/epoberezkin/dependent-effects#readme
-license: MIT
+    * <http://okmij.org/ftp/Haskell/extensible/more.pdf Freer Monads, More Extensible Effects>
+    * <http://okmij.org/ftp/Computation/monads.html#param-monad Parameterized monads>
+    * <http://okmij.org/ftp/Haskell/extensible/index.html#extext Parameterized Extensible Effects and Session Types>
+
+  It allows defining indexed monadic computations as GADTs without making
+  them into ad-hoc indexed monads, and instead use this data type
+  to convert them into Functor, XApplicative and XMonad instances
+  - see Control.XApplicative and Control.XMonad in this package.
+
+  This package does not (yet) allow composing these computations.
+
+  Semantically, these computations could represent type-level state changes
+  of some associated resources, with the first index parameter meaning
+  initial resource state prior to the computation, and the second index -
+  the final resource state, making each computation an edge in the graph
+  of resource state transitions.
+
+  For XApplicative/XMonad classes all class and additional functions have similar names
+  to standard Applicative/Monad functions, following two naming conventions:
+
+    * function names are prefixed with "x" (for "indeXed") - e.g. `xpure`, `xreturn`, `xliftM2` etc.
+    * operators are postfixed with ":" - e.g. `<*>:`, `>>=:`, `>=>:` etc.
+
+github: epoberezkin/freer-indexed
+homepage: https://github.com/epoberezkin/freer-indexed#readme
+license: BSD3
 author: Evgeny Poberezkin
 maintainer: evgeny@poberezkin.com
 copyright: 2020 Evgeny Poberezkin
-category: Effects
+category: Control, Effects
 extra-source-files:
   - README.md
+  - CHANGELOG.md
 
 dependencies:
   - base >= 4.7 && < 5
 
 library:
   source-dirs: src
+
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Worphans
+  - -Werror=incomplete-patterns
+  - -Werror=incomplete-uni-patterns
+  - -Wno-name-shadowing
