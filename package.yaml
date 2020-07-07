@@ -33,7 +33,7 @@ license: BSD3
 author: Evgeny Poberezkin
 maintainer: evgeny@poberezkin.com
 copyright: 2020 Evgeny Poberezkin
-category: Effects
+category: Control, Effects
 extra-source-files:
   - README.md
   - CHANGELOG.md

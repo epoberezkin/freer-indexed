@@ -87,11 +87,11 @@ instance XMonad (XFree f) where
   Pure x >>=: f = f x
   Bind u f >>=: g = Bind u (f >=>: g)
 
--- | @'XFree' (f p p)@ is a normal Applicative, it supports 'forever', 'traverse', 'sequenceA', etc.
+-- | @'XFree' (f p p)@ is a normal Applicative, it supports 'Control.Monad.forever', 'traverse', 'sequenceA', etc.
 instance Applicative (XFree f p p) where
   pure = xpure
   (<*>) = (<*>:)
 
--- | @'XFree' (f p p)@ is a normal Monad, it supports 'mapM', 'forM', 'sequence', etc.
+-- | @'XFree' (f p p)@ is a normal Monad, it supports 'mapM', 'Control.Monad.forM', 'sequence', etc.
 instance Monad (XFree f p p) where
   (>>=) = (>>=:)
