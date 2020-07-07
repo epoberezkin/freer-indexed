@@ -12,13 +12,14 @@
 -- Portability : non-portable
 --
 -- This module defines a "freer indexed monad" 'XFree'.
--- It combines the ideas of freer monad and indexed (aka parameterized) monad:
+-- It generalizes freer monad to have type indices/parameters:
 --
 --   * Freer Monads, More Extensible Effects by Oleg Kiselyov and Hiromi Ishii (http://okmij.org/ftp/Haskell/extensible/more.pdf)
 --   * Parameterized monads (http://okmij.org/ftp/Haskell/extensible/more.pdf).
+--   * Parameterized extensible effects and session types (http://okmij.org/ftp/Haskell/extensible/index.html#extext)
 --
--- It defines 'Functor' instance for @'XFree' f p q@, and 'XApplicative' and 'XMonad' instances for @'XFree' f@,
--- as well as 'Applicative' and 'Monad' instances for @'XFree' f p p@.
+-- It defines 'Functor' instance for @'XFree' f p q@, 'XApplicative' and 'XMonad' instances for @'XFree' f@,
+-- as well as 'Applicative' and 'Monad' instances for @'XFree' f p p@, where f is an algebraic effect of kind @k -> k -> Type -> Type@
 --
 -- 'XFree' simplifies defining indexed monadic computations as GADTs without making
 -- them into ad-hoc indexed monads and defining all needed applicative and monadic functions on them.
@@ -83,22 +84,14 @@ instance XApplicative (XFree f) where
   Bind u j <*>: x = Bind u ((<*>: x) . j)
 
 instance XMonad (XFree f) where
-  xreturn = Pure
   Pure x >>=: f = f x
   Bind u f >>=: g = Bind u (f >=>: g)
 
--- | making @'XFree' (f p p)@ an Applicative allows to use it with
--- functions, such as 'forever', 'traverse', 'sequenceA', etc.
---
--- It is useful when you have a sequence of indexed computations that does not
--- change the associated resource state (type index), even if individual computations do.
+-- | @'XFree' (f p p)@ is a normal Applicative, it supports 'forever', 'traverse', 'sequenceA', etc.
 instance Applicative (XFree f p p) where
   pure = xpure
   (<*>) = (<*>:)
 
--- | making @'XFree' (f p p)@ a Monad allows to use it with
--- functions, such as 'mapM', 'forM', 'sequence', etc.
+-- | @'XFree' (f p p)@ is a normal Monad, it supports 'mapM', 'forM', 'sequence', etc.
 instance Monad (XFree f p p) where
   (>>=) = (>>=:)
-  (>>) = (>>:)
-  return = xreturn

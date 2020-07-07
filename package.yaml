@@ -6,6 +6,7 @@ description: |
 
     * <http://okmij.org/ftp/Haskell/extensible/more.pdf Freer Monads, More Extensible Effects>
     * <http://okmij.org/ftp/Computation/monads.html#param-monad Parameterized monads>
+    * <http://okmij.org/ftp/Haskell/extensible/index.html#extext Parameterized Extensible Effects and Session Types>
 
   It allows defining indexed monadic computations as GADTs without making
   them into ad-hoc indexed monads, and instead use this data type
@@ -14,8 +15,8 @@ description: |
 
   This package does not (yet) allow composing these computations.
 
-  Semantically, this computation could represent type-level state changes
-  of some associated resource, with the first index parameter meaning
+  Semantically, these computations could represent type-level state changes
+  of some associated resources, with the first index parameter meaning
   initial resource state prior to the computation, and the second index -
   the final resource state, making each computation an edge in the graph
   of resource state transitions.
