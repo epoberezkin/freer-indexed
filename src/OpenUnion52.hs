@@ -30,7 +30,7 @@
 -- type t in the list r as the TRep. (We will need UnsafeCoerce then).
 
 -- The interface is the same as of other OpenUnion*.hs
-module OpenUnion
+module OpenUnion52
   ( Union,
     inj,
     prj,

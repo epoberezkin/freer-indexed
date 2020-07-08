@@ -87,6 +87,8 @@ instance XMonad (XFree f) where
   Pure x >>=: f = f x
   Bind u f >>=: g = Bind u (f >=>: g)
 
+Foldable
+
 -- | @'XFree' (f p p)@ is a normal Applicative, it supports 'Control.Monad.forever', 'traverse', 'sequenceA', etc.
 instance Applicative (XFree f p p) where
   pure = xpure

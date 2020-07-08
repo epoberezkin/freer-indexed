@@ -24,7 +24,7 @@ import Data.IORef -- For demonstration of lifting
 import Data.Monoid -- For demos
 import FTCQueue1
 import GHC.Exts (inline)
-import OpenUnion
+import OpenUnion52
 
 -- ------------------------------------------------------------------------
 -- A monadic library for communication between a handler and
@@ -54,25 +54,23 @@ data Eff r a
 -- Application to the `generalized effectful function' Arrs r b w
 
 {-# INLINEABLE qApp #-}
-qApp :: Arrs r b w -> b -> Eff r w
-qApp q x =
-  case inline tviewl q of
-    TOne k -> k x
-    k :| t -> case k x of
-      Val y -> qApp t y
-      E u q -> E u (q >< t)
+-- qApp :: Arrs r b w -> b -> Eff r w
+-- qApp q x =
+--   case inline tviewl q of
+--     TOne k -> k x
+--     k :| t -> case k x of
+--       Val y -> qApp t y
+--       E u q -> E u (q >< t)
 
-{-
 -- A bit more understandable version
 qApp :: Arrs r b w -> b -> Eff r w
-qApp q x = case tviewl q of
+qApp q x = case inline tviewl q of
   TOne k -> k x
   k :| t -> bind' (k x) t
   where
     bind' :: Eff r a -> Arrs r a b -> Eff r b
     bind' (Val y) k = qApp k y
     bind' (E u q) k = E u (q >< k)
--}
 
 -- Compose effectful arrows (and possibly change the effect!)
 {-# INLINE qComp #-}
@@ -82,7 +80,7 @@ qComp g h a = h $ qApp g a
 
 {-# INLINE qComps #-}
 qComps :: Arrs r a b -> (Eff r b -> Eff r' c) -> Arrs r' a c
-qComps g h = tsingleton $ \a -> h $ qApp g a
+qComps g h = tsingleton $ qComp g h
 
 -- Eff is still a monad and a functor (and Applicative)
 -- (despite the lack of the Functor constraint)

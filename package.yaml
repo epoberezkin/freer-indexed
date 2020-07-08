@@ -51,3 +51,4 @@ ghc-options:
   - -Werror=incomplete-patterns
   - -Werror=incomplete-uni-patterns
   - -Wno-name-shadowing
+  - -Wunused-type-patterns
